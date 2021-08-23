@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A coding Project by Helena Vaquera</title>
+    <title>TacoCat: A coding Project by Helena Vaquera</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +13,7 @@
    <link href="css/site.css" rel="stylesheet">
    <link href="css/prism.css" rel="stylesheet">
 
-   <link rel="icon" type="image/png" href="img/self-logo/logo-crop-square.png">
+   <link rel="icon" type="image/png" href="img/applogo.png">
    <!-- font-awesome -->
    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
     
@@ -23,7 +23,7 @@
     <!-- ======== Nav Section ======== -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/self-logo/logo-circle.png"  class=""alt="" height="35px"></a>
+            <a class="navbar-brand" href="#"><img src="./img/applogo.png" height="25px">TacoCat</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
                         <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/helenalvp/tacocat">Git Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="https://helenalvp.com/">About</a>
@@ -54,28 +54,74 @@
     <main class="flex-shrink-0">
       
         <div class="container py-4 px-5 pt-5 mt-lg-5">  
-            <h2 class="title border-1 border-bottom border-dark">The Code</h2>
+            <h2 class="title border-1 border-bottom border-dark">The Code for TacoCat</h2>
             <div class="row row-cols-1 row cols-lg-2 ">
                 <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            //Call Hello World
-                            function helloWorld(){
-                                alert("Hello World")
-                            }
-
+                            function getString(){
+                                let originalString = document.getElementById("userString").value;
+                            
+                                if(originalString != "" && originalString.length > 1){
+                                    let userStr = originalString.replace(/\W/g, '').toLowerCase();
+                            
+                                    let msgObj = checkPalindrome(userStr)  
+                            
+                                    displayMessage(msgObj)
+                                } else {
+                                    alert("Please enter a phrase or word")
+                                }
+                            } 
+                            
+                            function checkPalindrome(str){
+                                let revStr = "";
+                                let msgObj = {}
+                            
+                                for( let i = str.length -1; i >= 0 ; i --){
+                                    revStr += str[i];
+                                }
+                                (revStr == str)?(msgObj ={
+                                        heading : `You entered a Palindrome!`,
+                                         msg :`Your palindrome is ${str}.`
+                                        }):(msgObj ={
+                                            heading : `You did not enter a palindrome`,
+                                            msg : `${str} is not the same as ${revStr}`
+                                        }) 
+                                return msgObj;
+                              }
+                            
+                              function displayMessage(obj){
+                                document.getElementById("alert-header").innerHTML = obj.heading;
+                                document.getElementById("msg").innerHTML = obj.msg;
+                                document.getElementById("alert").classList.remove("invisible");  
+                              }
                         </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
                     <p>
-                        This code alerts you in the browser
+                        This project retrieves the user's string and checks to see if the string is a palindrome or not, and displays its results to the user.
                     </p>
-                    <h5>
-                        helloWorld
+                    <h5 class="info-font">
+                        getString
                     </h5>
                     <p>
-                        helloWorld is a function that displays an alert 
+                        <span class="text-danger">getString</span> gets the user's input and validates the input value, making sure that it is a string. 
+                        If it is not, then it will ask the user to enter a phrase or word. 
+                        If it is, then it will change the string to lowercase and user regex to take out spaces and special characters. Then it will call <span class="text-danger">checkPalindrome</span> and use that result to call <span class="text-danger">displayMessage</span>.
+                    </p>
+                    <h5 class="info-font mt-lg-4">
+                        checkPalindrome
+                    </h5>
+                    <p>
+                        <span class="text-danger">checkPalindrome</span> uses a for loop to create a new reversed string of the user's string. 
+                        The function will then return a message object according to the results fo the palindrome check to be used in <span class="text-danger">displayMessage</span>. 
+                    </p>
+                    <h5 class="info-font mt-lg-5">
+                        displayMessage
+                    </h5>
+                    <p>
+                        <span class="text-danger">displayMessage</span> uses the results of <span class="text-danger">checkPalindrome</span>, takes out the class that makes the alert visible, and adds the message of the results to the alert dialoge box for the user to see.
                     </p>
                 </div>
             </div>
